@@ -1,0 +1,17 @@
+{
+  "name": "algorithms",
+  "version": "1.0.0",
+  "description": "algorithms",
+  "main": "index.js",
+  "dependencies": {
+    "npm": "^6.8.0"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "webmalc.pw",
+  "license": "ISC"
+}
