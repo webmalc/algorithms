@@ -1,5 +1,11 @@
 module.exports = {
 
+    /**
+     * Compare anagrams O(n^2)
+     * @param {string} firstStr - The first anagram
+     * @param {string} secondStr - The second anagram
+     * @return {boolean}
+     */
     validAnagramSlow: function (firstStr, secondStr) {
         if(firstStr.length !== secondStr.length){
             return false;
@@ -15,7 +21,7 @@ module.exports = {
     },
 
     /**
-     * Compare anagrams
+     * Compare anagrams O(n)
      * @param {string} firstStr - The first anagram
      * @param {string} secondStr - The second anagram
      * @return {boolean}

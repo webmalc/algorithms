@@ -36,7 +36,7 @@ describe('frequency-counter', function() {
         let anagram = frequencyCounter.validAnagram;
         testAnagram(anagram);
     });
-    it('compare anagrams', function() {
+    it('compare anagrams performance', function() {
         let timeSlow = getDurationAnagram(frequencyCounter.validAnagramSlow);
         let time = getDurationAnagram(frequencyCounter.validAnagram);
         assert.equal(time < timeSlow, true);
