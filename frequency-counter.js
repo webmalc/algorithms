@@ -88,4 +88,18 @@ module.exports = {
         }
         return true;
     },
+
+    /**
+     * Find out if the two given numbers
+     * have the same frequency of digits O(n)
+     * @param {int} firstInt - The first number
+     * @param {int} secondInt - The second number
+     * @return {boolean}
+     */
+    sameFrequency: function (firstInt, secondInt) {
+        return module.exports.validAnagram(
+            firstInt.toString(),
+            secondInt.toString()
+        );
+    },
 };

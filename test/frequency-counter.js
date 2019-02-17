@@ -56,4 +56,13 @@ describe('frequency-counter', function() {
             'the frequency counter version is faster than the array version',
         );
     });
+    it('test sameFrequency function', function() {
+        let large = Math.pow(12233112331, 30);
+        let func = frequencyCounter.sameFrequency;
+        assert.equal(func(123, 321), true, '123');
+        assert.equal(func(123, 3211), false, 'different length');
+        assert.equal(func(41231, 13214), true, '41231');
+        assert.equal(func(12311, 32122), false, '12311');
+        assert.equal(func(large, large), true, 'large');
+    });
 });

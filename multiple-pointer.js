@@ -45,7 +45,7 @@ module.exports = {
             return 0;
         } 
         var i = 0;
-        for (var j = 1; j < source.length; j++) {
+        for (let j = 1; j < source.length; j++) {
             if (source[i] !== source[j]) {
                 i++;
                 source[i] = source[j];
