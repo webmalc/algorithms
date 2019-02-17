@@ -42,4 +42,26 @@ module.exports = {
         }
         return maxSum;
     },
+
+    /**
+     * Find length of the longest substring with all distinct characters
+     * in the string O(n)
+     * @param {string} str - the string
+     * @return {int}
+     */
+    findLongestSubstring: function (str) {
+        let longest = 0;
+        let start = 0;
+        let chars = {};
+
+        for(let i = 0; i < str.length; i++) {
+            let char = str[i];
+            if (chars[char] !== undefined) {
+                start = Math.max(chars[char] + 1, start);
+            }
+            chars[char] = i; 
+            longest = Math.max(longest, i - start + 1);
+        }
+        return longest;
+    },
 };

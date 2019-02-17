@@ -42,4 +42,13 @@ describe('multiple-pointer', function() {
             'the sliding window version is faster than the loop version',
         );
     });
+
+    it('test findLongestSubstring', function() {
+        let func = slidingWindow.findLongestSubstring;
+        assert.equal(func(''), 0, 'empty');
+        assert.equal(func('rithmschool'), 7, 'rithmschool');
+        assert.equal(func('thisisawesome'), 6, 'thisisawesome');
+        assert.equal(func('longestsubstring'), 8, 'longestsubstring');
+        assert.equal(func('thecatinthehat'), 7, 'thecatinthehat');
+    });
 });
