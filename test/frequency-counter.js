@@ -2,6 +2,7 @@ const assert = require('assert');
 const { performance } = require('perf_hooks');
 let frequencyCounter = require('../frequency-counter');
 
+
 describe('frequency-counter', function() {
 
 
@@ -13,7 +14,7 @@ describe('frequency-counter', function() {
     };
 
     let testAnagram = function(anagram) {
-        assert.equal(anagram('azz', 'zzss'), false, 'azz');
+        assert.equal(anagram('azz', 'Zs'), false, 'azz');
         assert.equal(anagram('anagram', 'nagaram'), true, 'anagram');
         assert.equal(anagram('rat', 'car'), false, 'rat');
         assert.equal(anagram('test', 'sett'), true, 'test');
@@ -32,13 +33,29 @@ describe('frequency-counter', function() {
         testAnagram(anagram);
 
     });
+
+    it('test arrays anagram', function() {
+        let anagram = frequencyCounter.validAnagramAsArrays;
+        testAnagram(anagram);
+
+    });
     it('test anagram', function() {
         let anagram = frequencyCounter.validAnagram;
         testAnagram(anagram);
     });
     it('compare anagrams performance', function() {
         let timeSlow = getDurationAnagram(frequencyCounter.validAnagramSlow);
+        let timeArray = getDurationAnagram(frequencyCounter.validAnagramAsArrays);
         let time = getDurationAnagram(frequencyCounter.validAnagram);
-        assert.equal(time < timeSlow, true);
+        assert.equal(
+            timeArray < timeSlow,
+            true,
+            'the array version is faster than the loops version',
+        );
+        assert.equal(
+            time < timeArray,
+            true,
+            'the frequency counter version is faster than the array version',
+        );
     });
 });

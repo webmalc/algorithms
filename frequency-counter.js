@@ -21,6 +21,22 @@ module.exports = {
     },
 
     /**
+     * Compare anagrams as arrays O(nlogn)
+     * @param {string} firstStr - The first anagram
+     * @param {string} secondStr - The second anagram
+     * @return {boolean}
+     */
+    validAnagramAsArrays: function (firstStr, secondStr) {
+        if(firstStr.length !== secondStr.length){
+            return false;
+        }
+        let firstArray = firstStr.split('').sort();
+        let secondArray = secondStr.split('').sort();
+
+        return JSON.stringify(firstArray)==JSON.stringify(secondArray);
+    },
+
+    /**
      * Compare anagrams O(n)
      * @param {string} firstStr - The first anagram
      * @param {string} secondStr - The second anagram
