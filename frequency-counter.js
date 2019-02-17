@@ -6,7 +6,7 @@ module.exports = {
      * @param {string} secondStr - The second anagram
      * @return {boolean}
      */
-    validAnagramSlow: function (firstStr, secondStr) {
+    validAnagramLoop: function (firstStr, secondStr) {
         if(firstStr.length !== secondStr.length){
             return false;
         }

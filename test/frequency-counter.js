@@ -1,6 +1,6 @@
 const assert = require('assert');
-const { performance } = require('perf_hooks');
 let frequencyCounter = require('../frequency-counter');
+let utils = require('./utils');
 
 
 describe('frequency-counter', function() {
@@ -13,7 +13,7 @@ describe('frequency-counter', function() {
         );
     };
 
-    let testAnagram = function(anagram) {
+    let doTest = function(anagram) {
         assert.equal(anagram('azz', 'Zs'), false, 'azz');
         assert.equal(anagram('anagram', 'nagaram'), true, 'anagram');
         assert.equal(anagram('rat', 'car'), false, 'rat');
@@ -21,38 +21,32 @@ describe('frequency-counter', function() {
         longTest(anagram);
     }; 
 
-    let getDurationAnagram = function(anagram) {
-        var start = performance.now();
-        longTest(anagram);
-        var end = performance.now();
-        return end - start;
-    };
-
     it('test slow anagram', function() {
-        let anagram = frequencyCounter.validAnagramSlow;
-        testAnagram(anagram);
+        let anagram = frequencyCounter.validAnagramLoop;
+        doTest(anagram);
 
     });
 
     it('test arrays anagram', function() {
         let anagram = frequencyCounter.validAnagramAsArrays;
-        testAnagram(anagram);
+        doTest(anagram);
 
     });
     it('test anagram', function() {
         let anagram = frequencyCounter.validAnagram;
-        testAnagram(anagram);
+        doTest(anagram);
     });
     it('test anagram v2', function() {
         let anagram = frequencyCounter.validAnagramV2;
-        testAnagram(anagram);
+        doTest(anagram);
     });
     it('compare anagrams performance', function() {
-        let timeSlow = getDurationAnagram(frequencyCounter.validAnagramSlow);
-        let timeArray = getDurationAnagram(frequencyCounter.validAnagramAsArrays);
-        let time = getDurationAnagram(frequencyCounter.validAnagram);
+        let duration = utils.getDuration;
+        let timeLoop = duration(longTest, frequencyCounter.validAnagramLoop);
+        let timeArray = duration(longTest, frequencyCounter.validAnagramAsArrays);
+        let time = duration(longTest, frequencyCounter.validAnagram);
         assert.equal(
-            timeArray < timeSlow,
+            timeArray < timeLoop,
             true,
             'the array version is faster than the loops version',
         );
