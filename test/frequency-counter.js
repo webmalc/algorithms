@@ -43,6 +43,10 @@ describe('frequency-counter', function() {
         let anagram = frequencyCounter.validAnagram;
         testAnagram(anagram);
     });
+    it('test anagram v2', function() {
+        let anagram = frequencyCounter.validAnagramV2;
+        testAnagram(anagram);
+    });
     it('compare anagrams performance', function() {
         let timeSlow = getDurationAnagram(frequencyCounter.validAnagramSlow);
         let timeArray = getDurationAnagram(frequencyCounter.validAnagramAsArrays);

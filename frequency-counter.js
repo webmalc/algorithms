@@ -63,4 +63,29 @@ module.exports = {
         }
         return true;
     },
+
+    /**
+     * Compare anagrams O(n) v2
+     * @param {string} firstStr - The first anagram
+     * @param {string} secondStr - The second anagram
+     * @return {boolean}
+     */
+    validAnagramV2: function (firstStr, secondStr) {
+        if(firstStr.length !== secondStr.length){
+            return false;
+        }
+        let lookup = {};
+        for (let char of firstStr) {
+            lookup[char] = (lookup[char] || 0) + 1;
+        }
+
+        for (let char of secondStr) {
+            if (!lookup[char]) {
+                return false;
+            } else {
+                lookup[char]--;
+            }
+        }
+        return true;
+    },
 };
