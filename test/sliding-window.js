@@ -2,9 +2,7 @@ const assert = require('assert');
 let slidingWindow = require('../sliding-window');
 let utils = require('./utils');
 
-
 describe('multiple-pointer', function() {
-
 
     let longTest = function(func) {
         const max = 10000;

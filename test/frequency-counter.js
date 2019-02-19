@@ -2,9 +2,7 @@ const assert = require('assert');
 let frequencyCounter = require('../frequency-counter');
 let utils = require('./utils');
 
-
 describe('frequency-counter', function() {
-
 
     let longTest = function(anagram) {
         const max = 10000;
