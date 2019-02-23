@@ -20,5 +20,41 @@ module.exports = {
             }
         }
         return arr;
-    }
+    },
+
+    /**
+     * Insertion sort O(n^2)
+     * @param {array} arr - array for sorting
+     * @return {array} sorted array
+     */
+    insertionSort: function (arr) {
+        let current;
+        for(var i = 1; i < arr.length; i++){
+            current = arr[i];
+            for(var j = i - 1; j >= 0 && arr[j] > current; j--) {
+                arr[j+1] = arr[j];
+            }
+            arr[j+1] = current;
+        }
+        return arr;
+    },
+
+    /**
+     * Insertion sort V2 O(n^2)
+     * @param {array} arr - array for sorting
+     * @return {array} sorted array
+     */
+    insertionSortV2: function (arr) {
+        let current;
+        for(var i = 1; i < arr.length; i++){
+            current = arr[i];
+            let j = i - 1;
+            while (j >=0 && current < arr[j]) {
+                arr[j+1] = arr[j];
+                j--;
+            }
+            arr[j+1] = current;
+        }
+        return arr;
+    },
 };
