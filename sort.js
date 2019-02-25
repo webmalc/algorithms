@@ -20,5 +20,26 @@ module.exports = {
             }
         }
         return arr;
+    },
+
+    /**
+     * Selection sort O(n^2)
+     * @param {array} arr - array for sorting
+     * @return {array} sorted array
+     */
+    selectionSort: function (arr) {
+        for (let i = 0; i < arr.length; i++) {
+            let min = i;
+            for (let j = i + 1; j < arr.length; j++) {
+                if (arr[min] > arr[j]) {
+                    min = j;
+                }
+            }
+            if (i !== min) {
+                [arr[i], arr[min]] = [arr[min], arr[i]];
+            } 
+        }
+
+        return arr;
     }
 };

@@ -1,6 +1,5 @@
 const assert = require('assert');
 let search = require('../search');
-let utils = require('./utils');
 
 describe('search', function() {
 
