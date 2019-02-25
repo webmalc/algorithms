@@ -14,7 +14,7 @@ describe('search', function() {
             {length: 10000}, () => Math.floor(Math.random() * 10000)
         );
         let largeSorted = sortNative(large);
-        assert.deepEqual(func([10, 23, 3, 4, 5]), [3, 4, 5, 10, 23]);
+        assert.deepEqual(func([23,10, 3, 4, 5]), [3, 4, 5, 10, 23]);
         assert.deepEqual(func([10, 23]), [10, 23]);
         assert.deepEqual(func([100]), [100]);
         assert.deepEqual(func([5, 4, 3, 2, 1]), [1, 2, 3, 4, 5]);
@@ -39,11 +39,27 @@ describe('search', function() {
         doTest(sort.insertionSortV2);
     });
 
+    it('test merge arrays', function() {
+        const func = sort.mergeArrays;
+        assert.deepEqual(
+            func([1, 10, 50], [2, 14, 99, 100]),
+            [1, 2, 10, 14, 50, 99, 100]
+        );
+        assert.deepEqual(func([1], [2]), [1, 2]);
+        assert.deepEqual(func([], [2]), [2]);
+        assert.deepEqual(func([], []), []);
+    });
+
+    it('test merge sort', function() {
+        doTest(sort.mergeSort);
+    });
+
     it('compare performance', function() {
         let duration = utils.getDuration;
         let timeBubble = duration(doTest, sort.bubbleSort);
         let timeSelection = duration(doTest, sort.selectionSort);
         let timeInsertion = duration(doTest, sort.insertionSort);
+        let timeMerge = duration(doTest, sort.mergeSort);
         let timeNative = duration(doTest, sortNative);
         assert.equal(
             timeSelection < timeBubble,
@@ -56,7 +72,12 @@ describe('search', function() {
             'the insertion sort version is faster than the selection sort version',
         );
         assert.equal(
-            timeNative < timeInsertion,
+            timeMerge < timeInsertion,
+            true,
+            'the merge sort version is faster than the insertion sort version',
+        );
+        assert.equal(
+            timeNative < timeMerge,
             true,
             'the native sort is the fastest',
         );

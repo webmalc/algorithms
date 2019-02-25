@@ -78,4 +78,50 @@ module.exports = {
         }
         return arr;
     },
+
+    /**
+     * Merge arrays O(n)
+     * @param {array} first - first sorted array 
+     * @param {array} second - second sorted array
+     * @return {array} sorted array
+     */
+    mergeArrays: function (first, second) {
+        let results = [];
+        let i = 0;
+        let j = 0;
+        while(i < first.length && j < second.length){
+            if(second[j] > first[i]){
+                results.push(first[i]);
+                i++;
+            } else {
+                results.push(second[j]);
+                j++;
+            }
+        }
+        while(i < first.length) {
+            results.push(first[i]);
+            i++;
+        }
+        while(j < second.length) {
+            results.push(second[j]);
+            j++;
+        }
+        return results;
+    },
+
+    /**
+     * Merge sort V2 O(nlogn)
+     * @param {array} arr - array for sorting
+     * @return {array} sorted array
+     */
+    mergeSort: function (arr) {
+        if(arr.length <= 1) {
+            return arr;
+        }
+        let middle = Math.floor(arr.length / 2);
+        let left = module.exports.mergeSort(arr.slice(0, middle));
+        let right = module.exports.mergeSort(arr.slice(middle));
+
+        return module.exports.mergeArrays(left, right);
+    },
 };
