@@ -31,10 +31,19 @@ describe('search', function() {
         doTest(sort.selectionSort);
     });
 
+    it('test insertion sort', function() {
+        doTest(sort.insertionSort);
+    });
+
+    it('test insertion sort V2', function() {
+        doTest(sort.insertionSortV2);
+    });
+
     it('compare performance', function() {
         let duration = utils.getDuration;
         let timeBubble = duration(doTest, sort.bubbleSort);
         let timeSelection = duration(doTest, sort.selectionSort);
+        let timeInsertion = duration(doTest, sort.insertionSort);
         let timeNative = duration(doTest, sortNative);
         assert.equal(
             timeSelection < timeBubble,
@@ -42,7 +51,12 @@ describe('search', function() {
             'the selection sort version is faster than the bubble sort version',
         );
         assert.equal(
-            timeNative < timeBubble,
+            timeInsertion < timeSelection,
+            true,
+            'the insertion sort version is faster than the selection sort version',
+        );
+        assert.equal(
+            timeNative < timeInsertion,
             true,
             'the native sort is the fastest',
         );
