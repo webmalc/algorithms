@@ -2,7 +2,7 @@ const assert = require('assert');
 let sort = require('../sort');
 let utils = require('./utils');
 
-describe('search', function() {
+describe('sort', function() {
 
 
     let sortNative = function(arr) {
@@ -52,6 +52,14 @@ describe('search', function() {
 
     it('test merge sort', function() {
         doTest(sort.mergeSort);
+    });
+
+    it('test pivot', function() {
+        const func = sort.reoderPivotArray;
+
+        let arr = [4, 8, 2, 1, 5, 7, 6, 3];
+        assert.deepEqual(func(arr, 0), 3);
+        assert.deepEqual(arr, [3, 2, 1, 4, 5, 7, 6, 8]);
     });
 
     it('compare performance', function() {

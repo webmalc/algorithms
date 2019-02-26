@@ -124,4 +124,30 @@ module.exports = {
 
         return module.exports.mergeArrays(left, right);
     },
+
+
+    /**
+     * Reorder array around the pivot element O(n)
+     * @param {array} arr - array for reordering
+     * @param {int} start - the start index
+     * @param {int} end - the end index 
+     * @return {int} index of the pivot element
+     */
+    reoderPivotArray: function (arr, start=0, end=arr.length) {
+        const swap = (arr, idx1, idx2) => {
+            [arr[idx1], arr[idx2]] = [arr[idx2], arr[idx1]];
+        };
+        let pivot = arr[start];
+        let swapIndex = start;
+
+        for (let i = start + 1; i <= end; i++) {
+            if (pivot > arr[i]) {
+                swapIndex++;
+                swap(arr, swapIndex, i);
+            }
+        }
+        swap(arr, start, swapIndex);
+
+        return swapIndex;
+    },
 };
