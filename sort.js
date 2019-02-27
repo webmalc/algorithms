@@ -5,13 +5,13 @@ module.exports = {
      * @param {array} arr - array for sorting
      * @return {array} sorted array
      */
-    bubbleSort: function (arr) {
+    bubbleSort: function(arr) {
         let swap = false;
         for (let i = arr.length; i > 0; i--) {
             swap = false;
             for (let j = 0; j < i - 1; j++) {
-                if (arr[j] > arr[j+1]) {
-                    [arr[j], arr[j+1]] = [arr[j+1], arr[j]];
+                if (arr[j] > arr[j + 1]) {
+                    [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
                     swap = true;
                 }
             }
@@ -27,7 +27,7 @@ module.exports = {
      * @param {array} arr - array for sorting
      * @return {array} sorted array
      */
-    selectionSort: function (arr) {
+    selectionSort: function(arr) {
         for (let i = 0; i < arr.length; i++) {
             let min = i;
             for (let j = i + 1; j < arr.length; j++) {
@@ -37,7 +37,7 @@ module.exports = {
             }
             if (i !== min) {
                 [arr[i], arr[min]] = [arr[min], arr[i]];
-            } 
+            }
         }
 
         return arr;
@@ -48,14 +48,14 @@ module.exports = {
      * @param {array} arr - array for sorting
      * @return {array} sorted array
      */
-    insertionSort: function (arr) {
+    insertionSort: function(arr) {
         let current;
-        for(var i = 1; i < arr.length; i++){
+        for (var i = 1; i < arr.length; i++) {
             current = arr[i];
-            for(var j = i - 1; j >= 0 && arr[j] > current; j--) {
-                arr[j+1] = arr[j];
+            for (var j = i - 1; j >= 0 && arr[j] > current; j--) {
+                arr[j + 1] = arr[j];
             }
-            arr[j+1] = current;
+            arr[j + 1] = current;
         }
         return arr;
     },
@@ -65,16 +65,16 @@ module.exports = {
      * @param {array} arr - array for sorting
      * @return {array} sorted array
      */
-    insertionSortV2: function (arr) {
+    insertionSortV2: function(arr) {
         let current;
-        for(var i = 1; i < arr.length; i++){
+        for (var i = 1; i < arr.length; i++) {
             current = arr[i];
             let j = i - 1;
-            while (j >=0 && current < arr[j]) {
-                arr[j+1] = arr[j];
+            while (j >= 0 && current < arr[j]) {
+                arr[j + 1] = arr[j];
                 j--;
             }
-            arr[j+1] = current;
+            arr[j + 1] = current;
         }
         return arr;
     },
@@ -85,12 +85,12 @@ module.exports = {
      * @param {array} second - second sorted array
      * @return {array} sorted array
      */
-    mergeArrays: function (first, second) {
+    mergeArrays: function(first, second) {
         let results = [];
         let i = 0;
         let j = 0;
-        while(i < first.length && j < second.length){
-            if(second[j] > first[i]){
+        while (i < first.length && j < second.length) {
+            if (second[j] > first[i]) {
                 results.push(first[i]);
                 i++;
             } else {
@@ -98,11 +98,11 @@ module.exports = {
                 j++;
             }
         }
-        while(i < first.length) {
+        while (i < first.length) {
             results.push(first[i]);
             i++;
         }
-        while(j < second.length) {
+        while (j < second.length) {
             results.push(second[j]);
             j++;
         }
@@ -110,12 +110,12 @@ module.exports = {
     },
 
     /**
-     * Merge sort V2 O(nlogn)
+     * Merge sort O(nlogn)
      * @param {array} arr - array for sorting
      * @return {array} sorted array
      */
-    mergeSort: function (arr) {
-        if(arr.length <= 1) {
+    mergeSort: function(arr) {
+        if (arr.length <= 1) {
             return arr;
         }
         let middle = Math.floor(arr.length / 2);
@@ -133,7 +133,7 @@ module.exports = {
      * @param {int} end - the end index 
      * @return {int} index of the pivot element
      */
-    reoderPivotArray: function (arr, start=0, end=arr.length) {
+    reoderPivotArray: function(arr, start = 0, end = arr.length) {
         const swap = (arr, idx1, idx2) => {
             [arr[idx1], arr[idx2]] = [arr[idx2], arr[idx1]];
         };
@@ -150,4 +150,20 @@ module.exports = {
 
         return swapIndex;
     },
+
+    /**
+     * Quick sort O(nlogn)
+     * @param {array} arr - array for sorting
+     * @return {array} sorted array
+     */
+    quickSort: function(arr, left = 0, right = arr.length - 1) {
+        if (left < right) {
+            let pivotIndex = module.exports.reoderPivotArray(arr, left, right);
+            module.exports.quickSort(arr, left, pivotIndex - 1);
+            module.exports.quickSort(arr, pivotIndex + 1, right);
+        }
+        return arr;
+    },
+
+
 };
