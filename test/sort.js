@@ -66,6 +66,33 @@ describe('sort', function() {
         doTest(sort.quickSort);
     });
 
+    it('test getDigit', function() {
+        const func = sort.getDigit;
+
+        assert.equal(func(12345, 0), 5);
+        assert.equal(func(12345, 1), 4);
+        assert.equal(func(12345, 2), 3);
+    });
+
+    it('test digitCount', function() {
+        const func = sort.digitCount;
+
+        assert.equal(func(12345), 5);
+        assert.equal(func(123), 3);
+        assert.equal(func(1234566), 7);
+    });
+
+    it('test mostDigits', function() {
+        const func = sort.mostDigits;
+
+        assert.equal(func([1, 21, 222, 1]), 3);
+        assert.equal(func([1, 213232, 222, 1]), 6);
+    });
+
+    it('test radix sort', function() {
+        doTest(sort.radixSort);
+    });
+
     it('compare performance', function() {
         let duration = utils.getDuration;
         let timeBubble = duration(doTest, sort.bubbleSort);
@@ -73,6 +100,7 @@ describe('sort', function() {
         let timeInsertion = duration(doTest, sort.insertionSort);
         let timeMerge = duration(doTest, sort.mergeSort);
         let timeQuick = duration(doTest, sort.quickSort);
+        let timeRadix = duration(doTest, sort.radixSort);
         let timeNative = duration(doTest, sortNative);
         assert.equal(
             timeSelection < timeBubble,
@@ -88,6 +116,11 @@ describe('sort', function() {
             timeQuick < timeInsertion,
             true,
             'the quick sort version is faster than the insertion sort version',
+        );
+        assert.equal(
+            timeRadix < timeQuick,
+            true,
+            'the radix sort version is faster than the quick sort version',
         );
         assert.equal(
             timeMerge < timeQuick,

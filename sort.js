@@ -165,5 +165,61 @@ module.exports = {
         return arr;
     },
 
+    /**
+     * Get the digit by its position (ex. 1235, 1 = 3) 
+     * @param {int} num - number to search
+     * @param {int} i - position of digit
+     * @return {int} digit on position i
+     */
+    getDigit: function(num, i) {
+        return Math.floor(Math.abs(num) / Math.pow(10, i)) % 10;
+    },
+
+    /**
+     * Get the number of digits in the number (ex. 1233 - 4)
+     * @param {int} num - number to count
+     * @return {int} number of digit
+     */
+    digitCount: function(num) {
+        if (num === 0) {
+            return 1;
+        }
+        return Math.floor(Math.log10(Math.abs(num))) + 1;
+    },
+
+    /**
+     * Find the length of the longest number in the array
+     * @param {array} nums - array of nums
+     * @return {int} length
+     */
+    mostDigits: function(nums) {
+        let maxDigits = 0;
+        let m = module.exports;
+        for (let i = 0; i < nums.length; i++) {
+            maxDigits = Math.max(maxDigits, m.digitCount(nums[i]));
+        }
+        return maxDigits;
+    },
+
+    /**
+     * Radix sort O(nk)
+     * @param {array} nums - array of numbers for sorting
+     * @return {array} sorted array
+     */
+    radixSort: function(nums) {
+        let m = module.exports;
+        let maxDigitCount = m.mostDigits(nums);
+        for (let k = 0; k < maxDigitCount; k++) {
+            let storage = Array.from({
+                length: 10
+            }, () => []);
+            for (let i = 0; i < nums.length; i++) {
+                let digit = m.getDigit(nums[i], k);
+                storage[digit].push(nums[i]);
+            }
+            nums = [].concat(...storage);
+        }
+        return nums;
+    },
 
 };
