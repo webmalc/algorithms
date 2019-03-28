@@ -42,7 +42,7 @@ class Queue {
 
     /**
      * Add a value to the queue O(1)
-     * @param {val} val
+     * @param {*} value
      * @return {int} the queue size
      */
     enqueue(val) {
