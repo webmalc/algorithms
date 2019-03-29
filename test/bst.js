@@ -4,7 +4,7 @@ let utils = require('./utils');
 
 describe('binary search tree', function() {
 
-    it('test the insert and includes methods', function() {
+    let getBST = function() {
         let bst = new BinarySearchTree();
         bst.insert(12);
         bst.insert(3);
@@ -17,6 +17,11 @@ describe('binary search tree', function() {
         bst.insert(55);
         bst.insert(15);
 
+        return bst;
+    };
+
+    it('test the insert and includes methods', function() {
+        let bst = getBST();
         assert.equal(bst.root.value, 12);
         assert.equal(bst.root.left.value, 3);
         assert.equal(bst.root.left.right.value, 5);
@@ -34,6 +39,14 @@ describe('binary search tree', function() {
         assert.ok(!bst.includes(0));
         assert.ok(!bst.includes(2));
     });
+
+
+    it('test the breadth-first search methods', function() {
+        let bst = getBST();
+        let result = JSON.stringify([12, 3, 44, 1, 5, 15, 55, 10, 9]);
+        assert.equal(JSON.stringify(bst.breadthFirstSearch()), result);
+    });
+
 
     let makeStorages = function() {
         let max = 50000;
