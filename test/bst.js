@@ -41,10 +41,16 @@ describe('binary search tree', function() {
     });
 
 
-    it('test the breadth-first search methods', function() {
+    it('test the breadth-first search method', function() {
         let bst = getBST();
         let result = JSON.stringify([12, 3, 44, 1, 5, 15, 55, 10, 9]);
         assert.equal(JSON.stringify(bst.breadthFirstSearch()), result);
+    });
+
+    it('test the depth-first pre order search method', function() {
+        let bst = getBST();
+        let result = JSON.stringify([12, 3, 1, 5, 10, 9, 44, 15, 55]);
+        assert.equal(JSON.stringify(bst.depthFirstSearchPreOrder()), result);
     });
 
 
