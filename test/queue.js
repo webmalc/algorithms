@@ -47,7 +47,7 @@ describe('queue', function() {
         assert.equal(
             queueDuration < arrayDuration,
             true,
-            'an queue is faster that a array',
+            'an queue is faster than an array',
         );
     });
 });
