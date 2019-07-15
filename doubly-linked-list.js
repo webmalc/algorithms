@@ -16,7 +16,7 @@ class DoublyLinkedList {
 
     /**
      * Push a value to the list O(1)
-     * @param {val} val
+     * @param {*} val
      * @return {DoublyLinkedList} the list
      */
     push(val) {
