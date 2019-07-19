@@ -48,17 +48,11 @@ describe('multiple-pointer', function() {
     it('compare performance', function() {
         let duration = utils.getDuration;
         let timeLoop = duration(longTest, multiplePointer.countUniqueValuesLoop);
-        let timeSet = duration(longTest, multiplePointer.countUniqueValuesSet);
         let time = duration(longTest, multiplePointer.countUniqueValues);
         assert.equal(
             time < timeLoop,
             true,
             'the multiple pointers version is faster than the loop version',
-        );
-        assert.equal(
-            timeSet > time,
-            true,
-            'the set version is the slowest',
         );
     });
 });
