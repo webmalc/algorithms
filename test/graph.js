@@ -3,6 +3,7 @@ const assert = require('assert');
 
 describe('graph', function() {
 
+    const s = JSON.stringify;
 
     let createGraph = function() {
         let graph = new Graph();
@@ -34,65 +35,92 @@ describe('graph', function() {
         assert.notEqual(keys.indexOf('Hong Kong'), -1);
 
         assert.equal(
-            JSON.stringify(graph.adjacencyList['Dallas']),
-            JSON.stringify(['Tokyo', 'Aspen', 'Hong Kong']),
+            s(graph.adjacencyList['Dallas']),
+            s(['Tokyo', 'Aspen', 'Hong Kong']),
         );
         assert.equal(
-            JSON.stringify(graph.adjacencyList['Los Angeles']),
-            JSON.stringify(['Hong Kong', 'Aspen']),
+            s(graph.adjacencyList['Los Angeles']),
+            s(['Hong Kong', 'Aspen']),
         );
     });
 
     it('test the removeEdge method', function() {
         let graph = createGraph();
         assert.equal(
-            JSON.stringify(graph.adjacencyList['Hong Kong']),
-            JSON.stringify(['Tokyo', 'Dallas', 'Los Angeles']),
+            s(graph.adjacencyList['Hong Kong']),
+            s(['Tokyo', 'Dallas', 'Los Angeles']),
         );
 
         assert.equal(
-            JSON.stringify(graph.adjacencyList['Tokyo']),
-            JSON.stringify(['Dallas', 'Hong Kong']),
+            s(graph.adjacencyList['Tokyo']),
+            s(['Dallas', 'Hong Kong']),
         );
         graph.removeEdge('Hong Kong', 'Tokyo');
 
         assert.equal(
-            JSON.stringify(graph.adjacencyList['Hong Kong']),
-            JSON.stringify(['Dallas', 'Los Angeles']),
+            s(graph.adjacencyList['Hong Kong']),
+            s(['Dallas', 'Los Angeles']),
         );
         assert.equal(
-            JSON.stringify(graph.adjacencyList['Tokyo']),
-            JSON.stringify(['Dallas']),
+            s(graph.adjacencyList['Tokyo']),
+            s(['Dallas']),
         );
     });
 
     it('test the removeVertex method', function() {
         let graph = createGraph();
         assert.equal(
-            JSON.stringify(graph.adjacencyList['Hong Kong']),
-            JSON.stringify(['Tokyo', 'Dallas', 'Los Angeles']),
+            s(graph.adjacencyList['Hong Kong']),
+            s(['Tokyo', 'Dallas', 'Los Angeles']),
         );
         assert.equal(
-            JSON.stringify(graph.adjacencyList['Dallas']),
-            JSON.stringify(['Tokyo', 'Aspen', 'Hong Kong']),
+            s(graph.adjacencyList['Dallas']),
+            s(['Tokyo', 'Aspen', 'Hong Kong']),
         );
 
         assert.equal(
-            JSON.stringify(graph.adjacencyList['Tokyo']),
-            JSON.stringify(['Dallas', 'Hong Kong']),
+            s(graph.adjacencyList['Tokyo']),
+            s(['Dallas', 'Hong Kong']),
         );
         graph.removeVertex('Tokyo');
 
         assert.equal(
-            JSON.stringify(graph.adjacencyList['Hong Kong']),
-            JSON.stringify(['Dallas', 'Los Angeles']),
+            s(graph.adjacencyList['Hong Kong']),
+            s(['Dallas', 'Los Angeles']),
         );
         assert.equal(
             graph.adjacencyList['Tokyo'], undefined,
         );
         assert.equal(
-            JSON.stringify(graph.adjacencyList['Dallas']),
-            JSON.stringify(['Aspen', 'Hong Kong']),
+            s(graph.adjacencyList['Dallas']),
+            s(['Aspen', 'Hong Kong']),
+        );
+    });
+
+    it('test the depthFirstRecursive method', function() {
+        const graph = createGraph();
+
+        assert.equal(
+            s(graph.depthFirstRecursive('Dallas')),
+            s(['Dallas', 'Tokyo', 'Hong Kong', 'Los Angeles', 'Aspen'])
+        );
+    });
+
+    it('test the depthFirstIterative method', function() {
+        const graph = createGraph();
+
+        assert.equal(
+            s(graph.depthFirstIterative('Dallas')),
+            s(['Dallas', 'Hong Kong', 'Los Angeles', 'Aspen', 'Tokyo'])
+        );
+    });
+
+    it('test the breadthFirst method', function() {
+        const graph = createGraph();
+
+        assert.equal(
+            s(graph.breadthFirst('Dallas')),
+            s(['Dallas', 'Tokyo', 'Aspen', 'Hong Kong', 'Los Angeles'])
         );
     });
 

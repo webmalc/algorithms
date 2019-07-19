@@ -6,7 +6,9 @@ describe('multiple-pointer', function() {
 
     let longTest = function(func) {
         const max = 10000;
-        const a = Array.apply(null, {length: max}).map(Number.call, Number);
+        const a = Array.apply(null, {
+            length: max
+        }).map(Number.call, Number);
         assert.equal(
             func(a), max, 'large'
         );
@@ -21,7 +23,7 @@ describe('multiple-pointer', function() {
         assert.equal(func([2]), 1, '1');
         assert.equal(func([-2, -1, 0, 1]), 4, '4');
         longTest(func);
-    }; 
+    };
 
     it('test multiple loops version', function() {
         let func = multiplePointer.countUniqueValuesLoop;
@@ -54,9 +56,9 @@ describe('multiple-pointer', function() {
             'the multiple pointers version is faster than the loop version',
         );
         assert.equal(
-            timeSet < time,
+            timeSet > time,
             true,
-            'the set version is the fastest',
+            'the set version is the slowest',
         );
     });
 });
