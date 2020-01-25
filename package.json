@@ -4,7 +4,7 @@
   "description": "algorithms",
   "main": "index.js",
   "dependencies": {
-    "npm": "^6.8.0"
+    "npm": "^6.13.6"
   },
   "devDependencies": {
     "mocha": "^5.2.0"
