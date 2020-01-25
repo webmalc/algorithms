@@ -1,8 +1,9 @@
 # python3
 """
-Task is to implement a simple phone book manager.
+Task is to implement a simple phone book manager
+using a self implemented hash table
 """
-from typing import List, Optional
+from typing import List, Optional, Tuple
 
 
 class Query:
@@ -20,28 +21,61 @@ class PhoneBook():
     """
     Class to store phones
     """
-    storage: List[Optional[str]]
+    storage: List[List[Tuple[int, str]]]
+    storage_len: int = 5
 
     def __init__(self):
-        self.storage = [None] * pow(10, 5)
+        self.storage = [[]] * self.storage_len
+
+    def hash(self, phone: int) -> int:
+        """
+        Hash the value
+        """
+        return hash(phone) % self.storage_len
 
     def add(self, phone: int, name: str) -> None:
         """
         Adds the phone
         """
-        self.storage[phone] = name
+        hashed_phone = self.hash(phone)
+        bucket = self.storage[hashed_phone]
+        key_exists = i = None
+        for i, vals in enumerate(bucket):
+            k, _ = vals
+            if phone == k:
+                key_exists = True
+                break
+        if key_exists:
+            bucket[i] = ((phone, name))
+        else:
+            bucket.append((phone, name))
 
     def delete(self, phone: int) -> None:
         """
         Deletes the phone
         """
-        self.storage[phone] = None
+        hashed_phone = self.hash(phone)
+        key_exists = i = None
+        bucket = self.storage[hashed_phone]
+        for i, vals in enumerate(bucket):
+            k, _ = vals
+            if phone == k:
+                key_exists = True
+                break
+        if key_exists:
+            del bucket[i]
 
     def find(self, phone: int) -> Optional[str]:
         """
         Finds the phone
         """
-        return self.storage[phone]
+        hashed_phone = self.hash(phone)
+        bucket = self.storage[hashed_phone]
+        for _, vals in enumerate(bucket):
+            k, val = vals
+            if phone == k:
+                return val
+        return None
 
 
 def read_queries():
